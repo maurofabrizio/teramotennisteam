@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teramo Tennis Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE occasion: il sito di un circolo, caldo e sportivo, come le locandine 2027
+   IDEA il campo in terra rossa con le sue righe bianche, e il rosso/oro del logo TTT
+   PICTURE campo in terra battuta visto dall'alto, rete e pallina, a tutta larghezza
+   COLOUR rosso TTT #c8101e, terra #c75a33, oro #c99a3a, pallina #dfe63a; sera bruno #1b0f0d
+   TYPE Oswald 700 (come il lettering delle locandine) + Barlow
+   LAYOUT barra rossa con logo; campo a tutta larghezza con il titolo in un pannello bianco a sinistra; poi fasce */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#1b0f0d);
+--ink:light-dark(#22110f,#f6ece8);
+--soft:light-dark(#6b4a44,#c9b2ab);
+--panel:light-dark(#fbf5f2,#2a1714);
+--line:light-dark(#ead9d2,#4a2c26);
+--red:#c8101e;--redd:#8e0c16;
+--redt:light-dark(#b30e1b,#ff6b6f);
+--clay:#c75a33;--clayd:#a8441f;
+--gold:light-dark(#a87a1f,#e0b553);
+--ball:#dfe63a}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Barlow,system-ui,sans-serif;overflow-x:clip}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:Oswald,Impact,sans-serif;font-weight:700;line-height:1.05;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h2{font-size:clamp(32px,4.4vw,48px);color:var(--redt)}
+h3{font-size:24px}
+p{margin:0 0 .8em}
+a{color:var(--redt)}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding-block:clamp(40px,5vw,72px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+.lead{color:var(--soft);max-width:62ch;margin-top:10px}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 32px;margin-bottom:28px}
+/* barra */
+nav{position:sticky;top:0;z-index:10;background:var(--red);color:#fff;padding:8px max(5vw,16px)}
+nav .wrap{display:flex;align-items:center;gap:8px 24px;flex-wrap:wrap}
+nav img{height:44px;width:auto}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:2px 4px;margin:0 0 0 auto;padding:0}
+nav a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:10px;border-radius:6px;display:block}
+nav a:hover,nav a:focus-visible{background:var(--redd);outline:none}
+/* campo */
+.hero{position:relative;background:var(--clay);overflow:hidden}
+.court{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);padding:clamp(28px,5vw,72px) max(5vw,16px)}
+.card{background:var(--bg);border-radius:14px;padding:clamp(22px,3vw,36px);box-shadow:0 10px 0 var(--clayd)}
+.card img{width:180px;margin-bottom:14px}
+.card h1{font-size:clamp(40px,6vw,64px);color:var(--redt)}
+.card h1 span{display:block;color:var(--gold)}
+.card .sub{font-size:20px;font-weight:600;margin:12px 0 20px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--red);font-size:16px;font-family:inherit;cursor:pointer}
+.btn.pri{background:var(--red);color:#fff}
+.btn.sec{background:transparent;color:var(--redt)}
+.btn:hover{filter:brightness(1.08)}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.next{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);display:flex;gap:14px;align-items:center}
+.next b{font-family:Oswald,sans-serif;font-size:34px;color:var(--red);line-height:1}
+.next small{display:block;color:var(--soft);font-size:14px}
+/* programma */
+.prog{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:40px;align-items:start}
+.ev{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.ev li{display:grid;grid-template-columns:7.2em 48px minmax(0,1fr);gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.ev .d{font-family:Oswald,sans-serif;font-size:34px;line-height:1;color:var(--redt);white-space:nowrap}
+.ev .d small{display:block;font-family:Barlow,sans-serif;font-size:14px;font-weight:600;color:var(--soft);text-transform:capitalize;margin-top:4px}
+.ev .d.r{font-size:20px;white-space:normal}
+.ev svg{width:44px;height:44px;color:var(--gold)}
+.ev .t{font-family:Oswald,sans-serif;font-size:24px;font-weight:500}
+.ev .t em{font-style:normal;color:var(--redt);font-weight:700}
+.ev li.on{background:color-mix(in srgb,var(--ball) 22%,transparent);border-radius:8px}
+.ev li.on .t::after{content:"Prossimo";font:700 13px Barlow,sans-serif;background:var(--red);color:#fff;border-radius:99px;padding:3px 10px;margin-left:10px;vertical-align:middle}
+.ev li.past{opacity:.5}
+.poster{position:sticky;top:88px}
+.poster a{display:block;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.poster p{font-size:14px;color:var(--soft);margin-top:10px}
+/* tessere */
+.tint{background:var(--panel)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.tess{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column}
+.tess .p{font-family:Oswald,sans-serif;font-size:52px;color:var(--red);line-height:1;margin:10px 0 14px;white-space:nowrap}
+.tess .p small{font-size:22px}
+.tess p{color:var(--soft);margin:0}
+.tess.hl{border:2px solid var(--red)}
+.tess .tag{align-self:flex-start;background:var(--gold);color:#fff;font-weight:700;font-size:13px;border-radius:99px;padding:3px 10px;margin-bottom:10px}
+/* sponsor */
+.spon{background:var(--redd);color:#fff}
+.spon h2{color:#fff}
+.spon .lead{color:#f3cfcf}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:end}
+.tier{background:#fff;color:#22110f;border-radius:14px;padding:24px;display:flex;flex-direction:column}
+.tier:nth-child(1){min-height:340px}.tier:nth-child(2){min-height:420px}.tier:nth-child(3){min-height:500px;box-shadow:0 0 0 4px #e0b553}
+.tier h3{color:#b30e1b}
+.tier .p{font-family:Oswald,sans-serif;font-size:48px;line-height:1;margin:8px 0 14px;color:#22110f;white-space:nowrap}
+.tier .inc{font-weight:700;font-size:15px;color:#8a5f12;margin-bottom:6px}
+.tier ul{margin:0;padding:0;list-style:none}
+.tier li{padding:6px 0 6px 26px;position:relative;font-size:16px;border-top:1px solid #f0e2dc}
+.tier li::before{content:"";position:absolute;left:4px;top:13px;width:10px;height:6px;border-left:3px solid #c8101e;border-bottom:3px solid #c8101e;transform:rotate(-45deg)}
+.spon .note{margin-top:24px;color:#f3cfcf;font-size:15px}
+/* aderire */
+.join{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.box{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--panel)}
+.iban{font-family:Oswald,sans-serif;font-size:clamp(20px,2.6vw,28px);letter-spacing:.02em;color:var(--redt);overflow-wrap:anywhere;margin:6px 0 12px}
+.lbl{font-weight:600;font-size:15px;color:var(--soft);display:block;margin-bottom:4px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+input,select{font:16px Barlow,sans-serif;padding:11px 12px;border:1px solid var(--soft);border-radius:8px;background:var(--bg);color:var(--ink);width:100%;min-height:46px}
+.f{margin-bottom:14px}
+.out{font-family:Oswald,sans-serif;font-weight:500;font-size:20px;background:var(--bg);border:2px dashed var(--gold);border-radius:8px;padding:12px;margin:6px 0 12px;overflow-wrap:anywhere}
+.ok{font-size:14px;color:var(--gold);font-weight:700;min-height:1.2em}
+.steps{margin:0;padding-left:1.2em}
+.steps li{margin-bottom:8px}
+.mods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.mod{display:flex;gap:14px;align-items:center;padding:16px;border-radius:12px;background:var(--bg);border:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.mod:hover{border-color:var(--red)}
+.mod svg{flex:none;width:36px;height:44px}
+.mod b{display:block;color:var(--redt)}
+.mod small{color:var(--soft)}
+/* convenzioni */
+.conv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.conv .tess h3{margin-bottom:10px}
+table{border-collapse:collapse;width:100%;font-size:16px}
+td{padding:9px 0;border-bottom:1px solid var(--line)}
+td:last-child{text-align:right;font-weight:700;white-space:nowrap}
+.big{font-family:Oswald,sans-serif;font-size:56px;color:var(--red);line-height:1;margin:6px 0 10px}
+/* notizie */
+.news{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.news blockquote{margin:0;font-family:Oswald,sans-serif;font-size:clamp(26px,3vw,36px);line-height:1.15;color:var(--redt);border-left:6px solid var(--ball);padding-left:18px}
+.news ul{padding-left:1.2em}
+footer{background:#1b0f0d;color:#e9dcd7;padding:40px max(5vw,16px)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:24px 48px;justify-content:space-between;align-items:center}
+footer img{height:56px;width:auto}
+footer p{margin:0;font-size:15px}
+footer a{color:#ffb3b5}
+@media(max-width:900px){.prog{grid-template-columns:1fr}.poster{position:static;max-width:420px}.tiers{grid-template-columns:1fr}.tier{min-height:0!important}}
+@media(max-width:760px){.hero .wrap{grid-template-columns:1fr;padding-bottom:180px}.grid3,.join,.conv,.news{grid-template-columns:1fr}nav ul{margin:0;width:100%;overflow-x:auto;flex-wrap:nowrap}nav li{flex:none}}
+@media(max-width:600px){.mods{grid-template-columns:1fr}.ev li{grid-template-columns:5.6em 36px minmax(0,1fr);gap:10px}.ev .d{font-size:28px}.ev svg{width:34px;height:34px}.ev .t{font-size:20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.court .bl{animation:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-beer" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M6 16h13v22a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z" fill="currentColor" fill-opacity=".25"/><path d="M19 21h3a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-3"/><path d="M27 16h13v22a3 3 0 0 1-3 3h-7a3 3 0 0 1-3-3z" fill="currentColor" fill-opacity=".25"/><path d="M40 21h2"/><path d="M6 16c1-4 12-4 13 0M27 16c1-4 12-4 13 0M23 6l1 5M17 8l3 4M29 8l-2 4"/></g></symbol>
+ <symbol id="i-people" viewBox="0 0 48 48"><g fill="currentColor"><circle cx="24" cy="14" r="6"/><path d="M13 38c0-8 5-13 11-13s11 5 11 13z"/><circle cx="10" cy="18" r="4.5" opacity=".7"/><path d="M2 36c0-6 3-10 8-10 2 0 3.5.6 4.6 1.7-2 2.6-3 5.8-3.3 8.3z" opacity=".7"/><circle cx="38" cy="18" r="4.5" opacity=".7"/><path d="M46 36c0-6-3-10-8-10-2 0-3.5.6-4.6 1.7 2 2.6 3 5.8 3.3 8.3z" opacity=".7"/></g></symbol>
+ <symbol id="i-rackets" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.6"><ellipse cx="16" cy="15" rx="9" ry="11" transform="rotate(-35 16 15)"/><ellipse cx="32" cy="15" rx="9" ry="11" transform="rotate(35 32 15)"/><path d="M22 23l14 20M26 23L12 43" stroke-linecap="round" stroke-width="3.4"/><path d="M10 9l12 12M13 6l11 10M7 13l10 10M38 9L26 21M35 6L24 16M41 13L31 23" stroke-width="1.2" opacity=".7"/></g></symbol>
+ <symbol id="i-shoe" viewBox="0 0 48 48"><g fill="currentColor"><path d="M14 14l8 2 2 6 8 4c6 2 12 3 12 8v3H8c-2 0-3-1-3-3l3-17z" opacity=".85"/><rect x="5" y="37" width="39" height="4" rx="2"/></g><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M1 22h4M0 28h5M2 33h3"/></g></symbol>
+ <symbol id="i-cup" viewBox="0 0 48 48"><g fill="currentColor"><path d="M13 5h22v11a11 11 0 0 1-22 0z"/><path d="M13 9H6c0 7 3 11 8 12M35 9h7c0 7-3 11-8 12" fill="none" stroke="currentColor" stroke-width="2.6"/><rect x="21" y="26" width="6" height="8"/><path d="M14 43c0-6 4-9 10-9s10 3 10 9z"/></g></symbol>
+ <symbol id="i-plate" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="24" cy="24" r="13" fill="currentColor" fill-opacity=".25"/><circle cx="24" cy="24" r="8"/><path d="M5 6v12a3 3 0 0 0 3 3v21M8 6v10M11 6v12a3 3 0 0 1-3 3M42 6c-4 3-4 10-1 14v22"/></g></symbol>
+ <symbol id="i-pdf" viewBox="0 0 36 44"><path d="M2 2h22l10 10v30H2z" fill="#fff" stroke="#c8101e" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 2v10h10" fill="none" stroke="#c8101e" stroke-width="2.5"/><rect x="5" y="24" width="26" height="11" rx="2" fill="#c8101e"/><text x="18" y="32.6" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="8.5" fill="#fff">PDF</text></symbol>
+</svg>
+
+<nav aria-label="Menu principale">
+ <div class="wrap">
+  <a href="#top" aria-label="Teramo Tennis Team, inizio pagina" style="padding:0"><img src="img/logo-white.png" alt="TTT Teramo Tennis Team"></a>
+  <ul>
+   <li><a href="#programma">Programma 2027</a></li>
+   <li><a href="#tessere">Tessere soci</a></li>
+   <li><a href="#sponsor">Sponsor</a></li>
+   <li><a href="#aderire">Come aderire</a></li>
+   <li><a href="#convenzioni">Convenzioni</a></li>
+   <li><a href="#notizie">Notizie</a></li>
+  </ul>
+ </div>
+</nav>
+
+<header class="hero" id="top">
+ <svg class="court" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+   <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".9" fill="#a8441f" opacity=".35"/><circle cx="4" cy="4" r=".7" fill="#e07b52" opacity=".35"/></pattern>
+   <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2774b"/><stop offset="1" stop-color="#b84c27"/></linearGradient>
+   <radialGradient id="fb" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#f3f77a"/><stop offset=".7" stop-color="#dfe63a"/><stop offset="1" stop-color="#b9bf1c"/></radialGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#sun)"/>
+  <rect width="1200" height="600" fill="url(#grain)"/>
+  <g fill="none" stroke="#fff" stroke-width="7" opacity=".95">
+   <rect x="80" y="70" width="1040" height="460"/>
+   <path d="M80 128h1040M80 472h1040M340 128v344M860 128v344M340 300h520M80 300h10M1110 300h10"/>
+  </g>
+  <rect x="595" y="40" width="10" height="520" fill="#f2ece6"/>
+  <g stroke="#3a2420" stroke-width="2" opacity=".55"><path d="M592 40v520M608 40v520"/></g>
+  <rect x="592" y="30" width="16" height="18" rx="3" fill="#2a1a17"/><rect x="592" y="552" width="16" height="18" rx="3" fill="#2a1a17"/>
+  <g class="bl" style="animation:hop 3.2s ease-in-out infinite;transform-origin:930px 360px">
+   <ellipse cx="948" cy="392" rx="40" ry="11" fill="#7d2f14" opacity=".45"/>
+   <circle cx="930" cy="350" r="38" fill="url(#fb)"/>
+   <path d="M898 330c18 10 22 34 10 52M962 330c-18 10-22 34-10 52" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+  </g>
+  <g fill="#fff" opacity=".7"><circle cx="760" cy="200" r="3"/><circle cx="700" cy="420" r="2.5"/><circle cx="1040" cy="190" r="3"/></g>
+ </svg>
+ <div class="wrap">
+  <div class="card">
+   <img src="img/logo-red.png" alt="">
+   <h1>Campagna tesseramento <span>2027</span></h1>
+   <p class="sub">A.S.D. Teramo Tennis Team: entra nella nostra squadra!</p>
+   <div class="btns">
+    <a class="btn pri" href="#aderire">Tesserati ora</a>
+    <a class="btn sec" href="#programma">Il programma 2027</a>
+   </div>
+   <div class="next" id="next"></div>
+  </div>
+ </div>
+</header>
+
+<section class="band" id="programma">
+ <div class="wrap prog">
+  <div>
+   <div class="head"><div><h2>Programma 2027</h2><p class="lead">Dieci appuntamenti tra campo, aperitivi e tornei. I dettagli di ogni iniziativa verranno forniti con locandine specifiche.</p></div></div>
+   <ul class="ev" id="ev"></ul>
+  </div>
+  <aside class="poster">
+   <a href="img/locandina-programma-2027.jpg" target="_blank" rel="noopener"><img src="img/locandina-programma-2027.jpg" alt="Locandina Programma 2027 del Teramo Tennis Team" loading="lazy"></a>
+   <p>La locandina del programma: aprila a piena grandezza per salvarla o condividerla.</p>
+  </aside>
+ </div>
+</section>
+
+<section class="band tint" id="tessere">
+ <div class="wrap">
+  <div class="head"><div><h2>Tessere soci</h2><p class="lead">Scegli la tessera che fa per te: per sostenere l'associazione, per giocare i campionati a squadre o per entrare per la prima volta nel TTT.</p></div></div>
+  <div class="grid3">
+   <article class="tess"><h3>Socio sostenitore</h3><div class="p">50 <small>€</small></div><p>Sostiene le attività dell'Associazione e partecipa alla vita sociale.</p></article>
+   <article class="tess"><h3>Socio agonista</h3><div class="p">80 <small>€</small></div><p>Per chi partecipa alle attività agonistiche e ai campionati a squadre.</p></article>
+   <article class="tess hl"><span class="tag">Primo ingresso</span><h3>Nuovo iscritto</h3><div class="p">110 <small>€</small></div><p>Quota di primo ingresso in Associazione, comprensiva di tesseramento e attivazione alle attività sociali e agonistiche.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="band spon" id="sponsor">
+ <div class="wrap">
+  <div class="head"><div><h2>Tessere sponsor</h2><p class="lead">Sostieni il tennis a Teramo e dai visibilità alla tua attività su locandine, materiali, divise ed eventi del TTT. Ogni livello comprende i benefici di quello precedente.</p></div></div>
+  <div class="tiers">
+   <article class="tier"><h3>Sponsor sostenitore</h3><div class="p">200 €</div>
+    <ul><li>Inserimento del logo sulle locandine e nei materiali di comunicazione dell'Associazione.</li><li>Visibilità del logo sul materiale non tecnico (es. t-shirt eventi come il Primo Maggio, iniziative sociali, ecc.).</li></ul></article>
+   <article class="tier"><h3>Main sponsor</h3><div class="p">500 €</div><div class="inc">Tutti i benefici dello Sponsor sostenitore, più:</div>
+    <ul><li>Esposizione di cartelli pubblicitari durante gli eventi dell'Associazione.</li><li>Visibilità del logo sul materiale tecnico (es. abbigliamento da gioco, divise delle squadre, ecc.).</li></ul></article>
+   <article class="tier"><h3>Premium sponsor</h3><div class="p">1.000 €</div><div class="inc">Tutti i benefici del Main sponsor, più:</div>
+    <ul><li>Massima visibilità del logo (posizione di primo piano su locandine, sito e materiali ufficiali).</li><li>Personalizzazione di un evento o torneo con il nome dello sponsor (es. "Trofeo …").</li><li>Presenza del logo su banner e fondali durante tutte le iniziative principali della stagione.</li></ul></article>
+  </div>
+  <p class="note">Agli sponsor chiediamo di inviare il logo in alta risoluzione, preferibilmente vettoriale (PDF, SVG, AI o EPS).</p>
+ </div>
+</section>
+
+<section class="band" id="aderire">
+ <div class="wrap">
+  <div class="head"><div><h2>Come aderire</h2><p class="lead">Compila il modulo, fai il bonifico e consegna il modulo all'Associazione. Qui sotto trovi l'IBAN e puoi preparare la causale giusta da copiare nell'app della tua banca.</p></div></div>
+  <div class="join">
+   <div class="box">
+    <span class="lbl">Bonifico bancario intestato a</span>
+    <div style="font-weight:700;font-size:19px">A.S.D. TERAMO TENNIS TEAM</div>
+    <div class="iban" id="iban">IT14K0760115300001064955717</div>
+    <div class="row"><button class="btn pri" type="button" id="cpIban">Copia IBAN</button><span class="ok" id="okIban" role="status"></span></div>
+    <ol class="steps" style="margin-top:20px">
+     <li>Scarica e compila il modulo: <b>tesseramento</b> per i soci, <b>adesione sponsor</b> per aziende e attività.</li>
+     <li>Effettua il bonifico indicando la causale.</li>
+     <li>Consegna il modulo compilato all'Associazione (gli sponsor allegano anche il logo).</li>
+    </ol>
+    <div class="mods">
+     <a class="mod" href="moduli/Modulo_Tesseramento_2027_TTT.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg><span><b>Modulo tesseramento 2027</b><small>Soci sostenitori, agonisti e nuovi iscritti</small></span></a>
+     <a class="mod" href="moduli/Modulo_Sponsor_2027_TTT.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg><span><b>Modulo adesione sponsor 2027</b><small>Sostenitore, Main e Premium</small></span></a>
+    </div>
+   </div>
+   <form class="box" id="caus" autocomplete="off">
+    <h3 style="margin-bottom:14px">Prepara la causale</h3>
+    <div class="f"><label class="lbl" for="nome">Nome e cognome, oppure ragione sociale</label><input id="nome" placeholder="es. Mario Rossi"></div>
+    <div class="f"><label class="lbl" for="tipo">Tessera scelta</label>
+     <select id="tipo">
+      <optgroup label="Soci"><option value="Socio sostenitore|50">Socio sostenitore – 50 €</option><option value="Socio agonista|80">Socio agonista – 80 €</option><option value="Nuovo iscritto|110" selected>Nuovo iscritto – 110 €</option></optgroup>
+      <optgroup label="Sponsor"><option value="Sponsor sostenitore|200">Sponsor sostenitore – 200 €</option><option value="Main sponsor|500">Main sponsor – 500 €</option><option value="Premium sponsor|1000">Premium sponsor – 1000 €</option></optgroup>
+     </select></div>
+    <span class="lbl">Causale da copiare</span>
+    <div class="out" id="out"></div>
+    <div class="row"><span>Importo: <b id="imp" style="font-size:22px;color:var(--redt)"></b></span></div>
+    <div class="row" style="margin-top:12px"><button class="btn pri" type="submit">Copia causale</button><span class="ok" id="okC" role="status"></span></div>
+   </form>
+  </div>
+ </div>
+</section>
+
+<section class="band tint" id="convenzioni">
+ <div class="wrap">
+  <div class="head"><div><h2>Convenzioni per i tesserati</h2><p class="lead">Con la tessera TTT hai condizioni dedicate presso i nostri partner.</p></div></div>
+  <div class="conv">
+   <article class="tess"><h3>Horama</h3><p style="margin-bottom:10px">Campo da tennis a tariffa ridotta per i tesserati TTT.</p>
+    <table><tbody><tr><td>Partita di singolare</td><td>12 €</td></tr><tr><td>Partita di doppio</td><td>18 €</td></tr><tr><td>Illuminazione</td><td>4 €</td></tr><tr><td>Riscaldamento</td><td>4 €</td></tr></tbody></table></article>
+   <article class="tess"><h3>Sport+</h3><div class="big">−10%</div><p>Sconto su tutti gli articoli da tennis del negozio per i tesserati TTT. Non valido su articoli già scontati e non cumulabile con altre promozioni.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="notizie">
+ <div class="wrap news">
+  <div><h2 style="margin-bottom:20px">TTT Day 2</h2>
+   <blockquote>Non stavamo tornando indietro, stavamo prendendo la rincorsa.</blockquote></div>
+  <div>
+   <p>Una domenica tutta TTT. Al mattino sfide di doppio:</p>
+   <ul><li>tabellone principale: vincono <b>Francesco Ciminà e Daniele Recchia</b>;</li><li>tabellone consolation: vincono <b>Vincenzo Quaranta e Alessandro Di Bartolomeo</b>.</li></ul>
+   <p>Nel pomeriggio, dopo il pranzo conviviale organizzato dall'Interamnia 13, abbiamo fatto il bilancio della stagione e gettato le basi per quella successiva.</p>
+   <p>Grazie a tutti gli associati che hanno dedicato la domenica al TTT.</p>
+  </div>
+ </div>
+</section>
+
+<footer>
+ <div class="wrap">
+  <img src="img/logo-white.png" alt="TTT Teramo Tennis Team">
+  <div><p><b>A.S.D. Teramo Tennis Team</b></p><p>IBAN IT14K0760115300001064955717</p></div>
+  <p><a href="#aderire">Tesserati per il 2027</a> · <a href="#sponsor">Diventa sponsor</a></p>
+ </div>
+</footer>
+
+<style>@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}</style>
+<script>
+{
+const EV=[
+ ['2027-01-29','beer','Aperi<em>TTT</em>ivo'],
+ ['2027-03-07','people','Assemblea dei soci'],
+ ['2027-04-11','rackets','<em>TTT</em>orneo dei soci'],
+ ['2027-05-01','shoe','Mara<em>TTT</em>onina'],
+ ['2027-05-14','beer','Aperi<em>TTT</em>ivo'],
+ ['2027-05-01|2027-07-31','cup','Tornei serie D'],
+ ['2027-09-03','beer','Aperi<em>TTT</em>iva'],
+ ['2027-09-26','rackets','<em>TTT</em>orneo dei soci'],
+ ['2027-10-22','beer','Aperi<em>TTT</em>ivo'],
+ ['2027-11-29','plate','Pranzo sociale con premiazioni']
+];
+const M=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+const dt=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const today=new Date();today.setHours(0,0,0,0);
+let nextIdx=-1;
+EV.forEach((e,i)=>{const end=dt(e[0].split('|').pop());if(nextIdx<0&&end>=today&&!e[0].includes('|'))nextIdx=i});
+document.getElementById('ev').innerHTML=EV.map((e,i)=>{
+ const range=e[0].includes('|');let d;
+ if(range){d='<div class="d r">Maggio – luglio<small>Campionato a squadre</small></div>'}
+ else{const x=dt(e[0]);d='<div class="d">'+x.getDate()+' '+M[x.getMonth()].slice(0,3)+'<small>'+x.toLocaleDateString('it-IT',{weekday:'long'})+'</small></div>'}
+ const end=dt(e[0].split('|').pop());
+ const cls=i===nextIdx?'on':(end<today?'past':'');
+ return '<li class="'+cls+'">'+d+'<svg aria-hidden="true"><use href="#i-'+e[1]+'"/></svg><div class="t">'+e[2]+'</div></li>'
+}).join('');
+const nx=document.getElementById('next');
+if(nextIdx>=0){const e=EV[nextIdx],x=dt(e[0]);const days=Math.round((x-today)/864e5);
+ nx.innerHTML='<b>'+x.getDate()+'</b><span><small>Prossimo appuntamento · '+x.toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})+(days>0?' · tra '+days+(days===1?' giorno':' giorni'):' · oggi')+'</small><strong>'+e[2].replace(/<\/?em>/g,'')+'</strong></span>'}
+else nx.remove();
+
+const copy=(txt,el)=>{const done=m=>{el.textContent=m;setTimeout(()=>el.textContent='',2500)};
+ try{navigator.clipboard.writeText(txt).then(()=>done('Copiato!'),()=>done('Seleziona e copia a mano'))}catch(_){done('Seleziona e copia a mano')}};
+document.getElementById('cpIban').addEventListener('click',()=>copy('IT14K0760115300001064955717',document.getElementById('okIban')));
+
+const nome=document.getElementById('nome'),tipo=document.getElementById('tipo'),out=document.getElementById('out'),imp=document.getElementById('imp');
+const upd=()=>{const[t,p]=tipo.value.split('|');const n=nome.value.trim()||'Nome e Cognome';
+ out.textContent='Tesseramento 2027 – '+n+' – '+t;imp.textContent=Number(p).toLocaleString('it-IT')+' €';
+ try{localStorage.setItem('ttt-caus',JSON.stringify({n:nome.value,t:tipo.value}))}catch(_){}};
+try{const s=JSON.parse(localStorage.getItem('ttt-caus')||'null');if(s){nome.value=s.n||'';if(s.t)tipo.value=s.t}}catch(_){}
+nome.addEventListener('input',upd);tipo.addEventListener('change',upd);upd();
+document.getElementById('caus').addEventListener('submit',ev=>{ev.preventDefault();copy(out.textContent,document.getElementById('okC'))});
+}
+</script>
+</body>
+</html>
